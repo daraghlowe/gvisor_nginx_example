@@ -1,0 +1,28 @@
+version: "2.3"
+services:
+  nginx-sidecar:
+    links:
+      - user-container
+    depends_on:
+      - user-container
+    build:
+      context: nginx/
+      dockerfile: Dockerfile
+    ports:
+      - "80:8081"
+    volumes:
+      - ncache:/data/nginx/cache
+    runtime: "runsc"
+    network_mode: "bridge"
+  user-container:
+    build:
+      context: user-container/
+      dockerfile: Dockerfile
+    expose:
+      - "8080"
+    environment:
+      PORT: "8080"
+    runtime: "runsc"
+    network_mode: "bridge"
+volumes:
+  ncache:
