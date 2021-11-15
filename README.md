@@ -10,8 +10,7 @@ Two container webapp where the nginx container proxies requests to a basic node 
 ### Load tests:
 
 #### Timeout errors occur
-**Test 1 - **
-https://app.k6.io/runs/public/21247df2e7584e8c9965f714ffb9aebe
+Test 1 - https://app.k6.io/runs/public/21247df2e7584e8c9965f714ffb9aebe
 ```
 gVisor: Yes 
 nginx caching: enabled 
@@ -19,16 +18,14 @@ tcp_nopush: on
 ```
 
 #### No timeout errors
-**Test 2 - **
-https://app.k6.io/runs/public/de12b41f8962448ca6d71fa3a8568dd1
+Test 2 - https://app.k6.io/runs/public/de12b41f8962448ca6d71fa3a8568dd1
 ```
 gVisor: Yes
 nginx caching: enabled
 tcp_nopush: off
 ```
 
-**Test 3 - **
-https://app.k6.io/runs/public/f2b6659765e64526865f5d32c38bc31d
+Test 3 - https://app.k6.io/runs/public/f2b6659765e64526865f5d32c38bc31d
 ```
 NOTE - the 100ms sleep in node app added to simulate backend request results in higher latency and lower throughput
 gVisor: Yes
@@ -36,8 +33,7 @@ nginx caching: disabled
 tcp_nopush: on
 ```
 
-**Test 4 - **
-https://app.k6.io/runs/public/5a715d2a7687435e8646780d04fbb3cf
+Test 4 - https://app.k6.io/runs/public/5a715d2a7687435e8646780d04fbb3cf
 ```
 gVisor: No
 nginx caching: enabled
