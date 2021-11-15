@@ -1,10 +1,40 @@
 ## Nginx performance bug in gvisor with 'tcp_nopush on' and caching
 
 ### Description:
-- This bug exists when you enable nginx caching and tcp_nopush where it causes reduced throughput, timeout errors and increased latency.
+This bug exists when you enable nginx caching and set tcp_nopush to on. If both are enabled while running in gvisor, it results in timeout errors.
 
-Load test example with caching enabled and tcp_nopush set to on:
+
+### Setup
+Two container webapp where the nginx container proxies requests to a basic node app, a 100ms sleep has been added to the node backend to simulate connectivity to a backend.
+
+### Load tests:
+
+#### Timeout errors occur
+**Test 1**
+gVisor: Yes 
+nginx caching: enabled 
+tcp_nopush: on
 https://app.k6.io/runs/public/21247df2e7584e8c9965f714ffb9aebe
+
+#### No timeout errors
+**Test 2**
+gVisor: Yes
+nginx caching: enabled
+tcp_nopush: off
+https://app.k6.io/runs/public/de12b41f8962448ca6d71fa3a8568dd1
+
+**Test 3**
+100ms simulation of backend in node app results in higher latency and lower throughput
+gVisor: Yes
+nginx caching: disabled
+tcp_nopush: on
+https://app.k6.io/runs/public/f2b6659765e64526865f5d32c38bc31d
+
+**Test 4**
+gVisor: No
+nginx caching: enabled
+tcp_nopush: on
+https://app.k6.io/runs/public/5a715d2a7687435e8646780d04fbb3cf
 
 
 
